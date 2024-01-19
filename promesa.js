@@ -1,27 +1,18 @@
-﻿//3
-const cargarDatosDeAPI = (url) => {
+﻿//4
+const ejecutarConTimeout = (ms) => {
     return new Promise((resolve, reject) => {
-        fetch(url)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`Error en la solicitud: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                resolve(data);
-            })
-            .catch(error => {
-                reject(`Error al cargar datos: ${error.mensaje}`)
-            })
-    })
+        setTimeout(() => {
+            resolve(`Operación completada después de ${ms} milisegundos`);
+        }, ms);
+    });
 }
 
-const apiUrl = "https://fakestoreapi.com/products/1"
-cargarDatosDeAPI(apiUrl)
-    .then((data) => {
-        console.log("Datos cargados: ", data);
-    }).catch((error) => {
+const tiempoLimite = 7000;
+ejecutarConTimeout(tiempoLimite)
+    .then(resultado => {
+        console.log(resultado);
+    })
+    .catch((error) => {
         console.error("Error: ", error);
     });
 
