@@ -1,14 +1,10 @@
-﻿//1
-//Las promesas son objetos que representan la terminación o fracaso eventual de una operación o función asincrona
-let promesaExitosa = new Promise((resolve, reject) => {
-    setTimeout(() => {
-        resolve("Promesa exitosa")
-    }, 3000);
+﻿//2
+let promesaConError = new Promise((resolve, reject) => {
+    //simula un error durante la operación
+    reject("Algo salió mal...")
 });
 
-//then: se ejecuta cuando la promesa se resulve exitosamente
-//catch: se ejecuta cuando la promesa es rechazada
-promesaExitosa.then((mensaje) => {
+promesaConError.then((mensaje) => {
     console.log(mensaje);
 }).catch((error) => {
     console.error(error);
