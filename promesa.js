@@ -11,12 +11,13 @@ const sumarRapido = (numero) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve(numero + 1);
+            // reject(console.log("Error en función de sumar rapido"))
         }, 300);
     });
 }
 
-//siempre ejecuta la primer función del arreglo
-Promise.all([sumarRapido(6), sumarLento(5), true, "Hola mundo"])
+//Promise.race compite entre las promesas y devuelve larespuesta que se resuelva más rapido
+Promise.race([sumarLento(5), sumarRapido(6)])
     .then(respuestas => {
         console.log(respuestas);
     }).catch(console.log)
