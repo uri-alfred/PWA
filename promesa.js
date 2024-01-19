@@ -1,18 +1,22 @@
-﻿//4
-const ejecutarConTimeout = (ms) => {
+﻿//5
+const sumarLento = (numero) => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(`Operación completada después de ${ms} milisegundos`);
-        }, ms);
+            resolve(numero + 1);
+            // reject(console.log("Error en función de sumar lento"))
+        }, 800);
+    });
+}
+const sumarRapido = (numero) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(numero + 1);
+        }, 300);
     });
 }
 
-const tiempoLimite = 7000;
-ejecutarConTimeout(tiempoLimite)
-    .then(resultado => {
-        console.log(resultado);
-    })
-    .catch((error) => {
-        console.error("Error: ", error);
-    });
-
+//siempre ejecuta la primer función del arreglo
+Promise.all([sumarRapido(6), sumarLento(5), true, "Hola mundo"])
+    .then(respuestas => {
+        console.log(respuestas);
+    }).catch(console.log)
