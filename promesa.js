@@ -2,7 +2,7 @@
 
 //Peticiones GET
 
-fetch('https://wikipedia.org')
+fetch('https://www.microsoft.com/es-mx')
     .then(res => res.text() )
     .then(html => {
         document.open();
