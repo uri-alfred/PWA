@@ -1,14 +1,16 @@
 ﻿//9
 const esperarNVeces = (nVeces) => {
     return new Promise((resolve, reject) => {
-        for (let i = 1; i <= nVeces; i++) {
-            setTimeout(() => {
-                console.log(`${i} segundos...`);
-                if (i == nVeces) {
-                    resolve(`¡He esperado ${nVeces} veces!`);
-                }
-            }, 1000);
-        }
+        let contador = 1;
+        const intervalo = setInterval(() => {
+            if (contador <= nVeces) {
+                console.log(`${contador} segundos...`);
+                contador++;
+            } else {
+                clearInterval(intervalo);
+                resolve(`¡He esperado ${nVeces} veces!`);
+            }
+        }, 1000);
     });
 }
 
