@@ -1,22 +1,25 @@
-﻿//5
-const sumarLento = (numero) => {
+﻿//7
+const funcionUno = () => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve(numero + 1);
-            // reject(console.log("Error en función de sumar lento"))
-        }, 800);
+        resolve("Función uno exitosa");
     });
 }
-const sumarRapido = (numero) => {
+const funcionDos = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(numero + 1);
-        }, 300);
+            reject("Error en función 2");
+        }, 1000);
     });
 }
 
-//siempre ejecuta la primer función del arreglo
-Promise.all([sumarRapido(6), sumarLento(5), true, "Hola mundo"])
-    .then(respuestas => {
+async function realizarOperacionesAsincronas() {
+    try {
+        const respuestas = await Promise.all([funcionUno(), funcionDos()]);
         console.log(respuestas);
-    }).catch(console.log)
+    } catch (error) {
+        return console.error(error);
+    }
+}
+
+
+realizarOperacionesAsincronas();
