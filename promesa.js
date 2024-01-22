@@ -1,25 +1,29 @@
-﻿//7
-const funcionUno = () => {
-    return new Promise((resolve, reject) => {
-        resolve("Función uno exitosa");
-    });
-}
-const funcionDos = () => {
+﻿//8
+const promesaPrueba = () => {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            reject("Error en función 2");
-        }, 1000);
+            resolve("La promesa se resolvio en 10s");
+        }, 10000);
     });
 }
 
-async function realizarOperacionesAsincronas() {
+const validaTiempoRespuesta = (tiempoLimite) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(`Se ha agotado el tiempo límite de ${tiempoLimite}s.`);
+        }, tiempoLimite * 1000);
+      })
+}
+
+
+async function promesaConTimeout(promesa, tiempoLimite) {
     try {
-        const respuestas = await Promise.all([funcionUno(), funcionDos()]);
-        console.log(respuestas);
-    } catch (error) {
-        return console.error(error);
+        const respuesta = await Promise.race([promesa, validaTiempoRespuesta(tiempoLimite)]);
+        console.log(respuesta);
+    } catch (data) {
+        return console.log(data);
     }
 }
 
 
-realizarOperacionesAsincronas();
+promesaConTimeout(promesaPrueba(), 5);
