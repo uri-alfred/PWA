@@ -1,29 +1,17 @@
-﻿//8
-const promesaPrueba = () => {
+﻿//9
+const esperarNVeces = (nVeces) => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve("La promesa se resolvio en 10s");
-        }, 10000);
+        for (let i = 1; i <= nVeces; i++) {
+            setTimeout(() => {
+                console.log(`${i} segundos...`);
+                if (i == nVeces) {
+                    resolve(`¡He esperado ${nVeces} veces!`);
+                }
+            }, 1000);
+        }
     });
 }
 
-const validaTiempoRespuesta = (tiempoLimite) => {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-          reject(`Se ha agotado el tiempo límite de ${tiempoLimite}s.`);
-        }, tiempoLimite * 1000);
-      })
-}
-
-
-async function promesaConTimeout(promesa, tiempoLimite) {
-    try {
-        const respuesta = await Promise.race([promesa, validaTiempoRespuesta(tiempoLimite)]);
-        console.log(respuesta);
-    } catch (data) {
-        return console.log(data);
-    }
-}
-
-
-promesaConTimeout(promesaPrueba(), 5);
+esperarNVeces(3).then(respuesta => {
+    console.log(respuesta)
+}).catch(console.log)
