@@ -2,10 +2,10 @@
 
 //Peticiones GET
 
-fetch('https://fakestoreapi.com/products/1')
-    .then(res => res.json() )
-    .then(respJson => {
-        console.log(respJson)
-        console.log(respJson.price)
+fetch('https://wikipedia.org')
+    .then(res => res.text() )
+    .then(html => {
+        document.open();
+        document.write(html);
+        document.close();
     })
-    .catch(json => console.log(json))
