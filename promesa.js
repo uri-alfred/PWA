@@ -1,22 +1,24 @@
-﻿//fetch 4
+﻿//fetch 5
 
-//Peticiones POST
+//Fetch archivos locales
 
-let user = {
-    name: 'Uriel Alfredo',
-    age: 25
-}
+//Almacena de manera local una imagen dentro de este
+//proyecto en la carpeta img realiza una solicitud fech de esta imagen
+//y muestrala en el navegador
 
-fetch('https://reqres.in/api/users', {
-    method: 'POST',
-    body: JSON.stringify(user),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-})
-.then(resp => resp.json() )
-.then(console.log)
-.catch(error => {
-    console.log('Error en la petición')
-    console.log(error)
-})
+fetch("./img/archangel.png")
+    .then(resp => {
+        console.log(resp);
+        return resp.url
+    })
+    .then(img => {
+        console.log(img)
+        let imagen = document.createElement("img");
+        imagen.src = img;
+        imagen.style = "width: 600px"
+        document.body.appendChild(imagen);
+    })
+    .catch(error => {
+        console.log('Error en la solicitud de la imagen')
+        console.log(error)
+    })
