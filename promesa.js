@@ -1,24 +1,17 @@
-﻿//fetch 5
+﻿//fetch 7
 
-//Fetch archivos locales
+// https://fakestoreapi.com/products/1
 
-//Almacena de manera local una imagen dentro de este
-//proyecto en la carpeta img realiza una solicitud fech de esta imagen
-//y muestrala en el navegador
-
-fetch("./img/archangel.png")
+fetch('https://pokeapi.co/api/v2/pokemon-form/100000')
     .then(resp => {
-        console.log(resp);
-        return resp.url
+        if (resp.ok) {
+            return resp.json()
+        } else {
+            throw new Error('No existe producto')
+        }
     })
-    .then(img => {
-        console.log(img)
-        let imagen = document.createElement("img");
-        imagen.src = img;
-        imagen.style = "width: 600px"
-        document.body.appendChild(imagen);
-    })
-    .catch(error => {
-        console.log('Error en la solicitud de la imagen')
-        console.log(error)
+    .then(console.log)
+    .catch(err => {
+        console.log('Error en la petición')
+        console.log(err)
     })
