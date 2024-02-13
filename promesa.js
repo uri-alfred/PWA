@@ -1,11 +1,24 @@
-﻿//fetch 8
+﻿// Uriel Alfredo Botello Reséndiz
+//fetch 9
 
-fetch('not-found.html')
-    .then(resp => resp.text())
-    .then(html => {
-        document.querySelector('body').innerHTML = html
+fetch('https://fakestoreapi.com/products')
+    .then(resp => resp.json())
+    .then(productos => {
+        console.log(productos)
+        let textContenido = "<h1> Productos: </h1> </br>";
+        productos.forEach(prod => {
+            textContenido += prod.id + " - " + prod.title + "</br>";
+        });
+        document.querySelector('body').innerHTML = textContenido;
     })
     .catch(err => {
-        console.log('Error en la petición')
-        console.log(err)
+        fetch('not-found.html')
+            .then(resp => resp.text())
+            .then(html => {
+                document.querySelector('body').innerHTML = html
+            })
+            .catch(err => {
+                console.log(err)
+            })
+        console.log('No se ha podido completar la solicitud')
     })
